@@ -1,0 +1,5 @@
+{
+  "name": "MarketMind AI",
+  "description": "Financial Market Intelligence Platform with real-time sentiment analysis, COT data, seasonality, and anomaly detection.",
+  "requestFramePermissions": []
+}
