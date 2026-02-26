@@ -100,6 +100,17 @@ async function startServer() {
     ]);
   });
 
+  app.get("/api/cot-overview", (req, res) => {
+    res.json([
+      { asset: "Gold", netPosition: 245000, weeklyChange: "+12,500", index: 85, bias: "BULLISH" },
+      { asset: "EUR", netPosition: -45000, weeklyChange: "-5,200", index: 20, bias: "BEARISH" },
+      { asset: "S&P 500", netPosition: 120000, weeklyChange: "+8,000", index: 65, bias: "BULLISH" },
+      { asset: "Oil", netPosition: 15000, weeklyChange: "-1,500", index: 40, bias: "NEUTRAL" },
+      { asset: "JPY", netPosition: -85000, weeklyChange: "-12,000", index: 10, bias: "BEARISH" },
+      { asset: "Bitcoin", netPosition: 18000, weeklyChange: "+2,500", index: 90, bias: "BULLISH" },
+    ]);
+  });
+
   app.get("/api/anomalies", (req, res) => {
     res.json([
       { id: "1", asset: "JPY", type: "Price Anomaly", description: "3 std dev move detected", time: "10 mins ago" },
