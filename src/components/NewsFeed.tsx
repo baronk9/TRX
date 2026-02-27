@@ -12,6 +12,7 @@ interface NewsItem {
   sentiment: 'BULLISH' | 'BEARISH' | 'NEUTRAL';
   sentiment_score: number;
   impact_level: 'HIGH' | 'MEDIUM' | 'LOW';
+  link?: string;
 }
 
 export default function NewsFeed() {
@@ -51,7 +52,13 @@ export default function NewsFeed() {
 
       <div className="flex-1 overflow-y-auto pr-2 space-y-4 custom-scrollbar">
         {news.map((item) => (
-          <div key={item.article_id} className="p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors group cursor-pointer">
+          <a
+            key={item.article_id}
+            href={item.link || '#'}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block p-4 rounded-xl border border-white/5 bg-white/[0.02] hover:bg-white/[0.04] transition-colors group cursor-pointer"
+          >
             <div className="flex items-center justify-between mb-2">
               <div className="flex items-center gap-2">
                 <span className="text-xs font-medium text-gray-400">{item.source}</span>
@@ -66,23 +73,25 @@ export default function NewsFeed() {
                 {item.sentiment}
               </div>
             </div>
-            
+
             <h4 className="text-sm font-semibold text-gray-100 mb-2 leading-snug group-hover:text-indigo-300 transition-colors">
               {item.headline}
             </h4>
-            
-            <p className="text-xs text-gray-400 line-clamp-2 mb-3">
-              {item.summary}
-            </p>
 
-            <div className="flex items-center gap-2 flex-wrap">
-              {item.asset_tags.map(tag => (
+            {item.summary && (
+              <p className="text-xs text-gray-400 line-clamp-2 mb-3">
+                {item.summary}
+              </p>
+            )}
+
+            <div className="flex items-center gap-2 flex-wrap mt-3">
+              {item.asset_tags && item.asset_tags.map(tag => (
                 <span key={tag} className="px-2 py-1 rounded bg-white/5 text-gray-300 text-[10px] font-medium border border-white/10">
                   {tag}
                 </span>
               ))}
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>
